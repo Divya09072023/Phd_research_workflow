@@ -1,0 +1,25 @@
+Research Notes
+Title of the Paper
+LLM-TIKG: Threat Intelligence Knowledge Graph Construction Utilizing Large Language Model
+Citation 
+Hu, Y., Zou, F., Han, J., Sun, X., and Wang, Y., “LLM-TIKG: Threat Intelligence Knowledge Graph Construction Utilizing Large Language Model,” Computers & Security, vol. 144, p. 103999, 2024.
+Introduction
+Cyber Threat Intelligence (CTI) is crucial for identifying cyber threats, but most CTI data is unstructured and difficult to process.
+Problem Statement
+Existing methods struggle with unstructured data, require large datasets, and fail to capture attack behaviors.
+Research Gap
+Current methods fail to efficiently extract structured intelligence from unstructured CTI data with limited labeled data.
+Objective
+To develop an automated system using LLMs for extracting threat intelligence and constructing knowledge graphs.
+Proposed Method
+LLM-TIKG uses LLMs and few-shot learning to extract entities, relationships, and TTPs.
+Methodology
+Includes text processing, entity recognition, relation extraction, TTP classification, and knowledge graph construction.
+Experimental Setup
+Performance evaluation, fine-tuning analysis, and real-world dataset testing.
+Evaluation Metrics
+Accuracy, Precision, Recall, F1-score.
+Results
+The model outperforms traditional approaches and works well with limited data.
+Conclusion
+LLM-based approaches improve CTI extraction and enable effective knowledge graph construction.
