@@ -1,0 +1,72 @@
+Technical Notes: CTIKG: LLM-Powered Knowledge Graph Construction from Cyber Threat Intelligence
+Title: CTIKG: LLM-Powered Knowledge Graph Construction from Cyber Threat Intelligence
+
+Authors: Liangyi Huang, Xusheng Xiao (Arizona State University)
+
+Publication: Published as a conference paper at COLM 2024
+
+
+Citation: Huang, L., & Xiao, X. (2024). CTIKG: LLM-Powered 
+Knowledge Graph Construction from Cyber Threat Intelligence. In Proceedings of the 1st Conference on Language Modeling (COLM 2024).
+
+ Summary
+The paper introduces CTIKG, a system designed to build a security-oriented Knowledge Graph (KG) from unstructured Cyber Threat Intelligence (CTI) articles (blogs, forum posts, etc.). While standard databases like CVE and NVD provide structured data, they lack the "connective tissue" found in technical articles. CTIKG uses LLM agents with a unique dual-memory design to extract entities and relationships while overcoming common LLM limitations like hallucinations and token limits.
+
+Core Challenges in CTI Analysis
+Fragmentation: Information about a single threat is often spread across multiple articles from different vendors.
+
+Unstructured Nature: Technical blogs contain nuanced descriptions of attack paths that are difficult for traditional NLP to parse.
+
+LLM Constraints: * Hallucinations: Models may invent security relationships.
+
+Token Limits: Detailed threat reports often exceed the context window of LLMs.
+
+Randomness: LLMs may provide inconsistent outputs for the same input.
+
+3. The CTIKG Architecture
+CTIKG addresses these challenges through a multi-agent system:
+
+A. Segmentation & Dual Memory Design
+To handle long articles, CTIKG divides text into segments. It utilizes two types of memory:
+
+Local Memory: Stores information extracted from the current segment.
+
+Global Memory: Keeps track of information across the entire article to ensure consistency and context.
+
+B. Multi-Agent Pipeline
+Extractor Agent: Identifies security-related entities (Software, Vulnerability, Attacker, File, etc.) and the relationships between them.
+
+Summarizer Agent: Merges the findings from different segments using the global memory to create a cohesive graph for the entire article.
+
+Refiner Agent: Cross-checks the extracted data to minimize hallucinations and ensure technical accuracy.
+
+C. Knowledge Graph Construction & Update
+Entity Resolution: Uses LLMs to determine if two entities (e.g., different names for the same malware) are the same.
+
+Incremental Updates: When a new article is processed, CTIKG compares it against the existing graph to add new nodes or edges, effectively "growing" the intelligence database over time.
+
+4. Key Innovation: Prompt Engineering
+The system relies on sophisticated prompt engineering rather than expensive fine-tuning. It uses:
+
+Role-playing: Assigning the LLM the role of a "Cyber Security Expert."
+
+Constraint-based Prompts: Forcing the output into a structured JSON format to ensure it can be automatically converted into a graph.
+
+5. Evaluation & Results
+The authors evaluated CTIKG using a dataset of articles covering various CVEs:
+
+Superior Extraction: CTIKG identified significantly more "hidden" relationships (e.g., links between different vulnerabilities used in the same attack) than standard databases.
+
+Efficiency: By using a segment-and-summarize approach, it maintained high accuracy even on very long, complex technical reports.
+
+Case Study (CVE-2021-27065): CTIKG revealed that this specific vulnerability could overwrite system files—a detail found in technical blogs but missing from the official NVD description.
+
+6. Practical Benefits for Security Teams
+Automated Attribution: Faster identification of threat actors by linking tools and techniques across different reports.
+
+Vulnerability Management: Helps defenders see the "bigger picture" of how a vulnerability is actually exploited in the wild, beyond its CVSS score.
+
+Knowledge Consolidation: Turns hundreds of disparate PDFs and blog posts into a single, searchable, and queryable graph.
+
+7. Comparison with LLM-TIKG (Previous Paper)
+While LLM-TIKG focused on fine-tuning a local model (Llama2) to create a graph, CTIKG focuses on a multi-agent, prompt-engineered approach that emphasizes handling long-form text and cross-article information fusion. CTIKG is designed to be more "plug-and-play" with existing powerful LLMs like GPT-4.
