@@ -1,0 +1,6 @@
+The project uses the following Python libraries:
+
+pandas
+numpy
+matplotlib
+seaborn
